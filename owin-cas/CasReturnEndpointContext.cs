@@ -2,7 +2,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Provider;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     /// <summary>
     /// Provides context information to middleware providers.

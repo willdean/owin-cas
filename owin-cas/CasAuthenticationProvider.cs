@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using owin_cas;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     /// <summary>
     /// Default <see cref="ICasAuthenticationProvider"/> implementation.

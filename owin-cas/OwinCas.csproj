@@ -7,8 +7,8 @@
     <ProjectGuid>{47E2288A-7C47-4503-9F87-8B0B412CB209}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>owin_cas</RootNamespace>
-    <AssemblyName>owin-cas</AssemblyName>
+    <RootNamespace>OwinCas</RootNamespace>
+    <AssemblyName>OwinCas</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

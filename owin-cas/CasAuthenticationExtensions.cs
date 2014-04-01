@@ -1,7 +1,7 @@
 using System;
 using Owin;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     /// <summary>
     /// Extension methods for using <see cref="CasAuthenticationMiddleware"/>

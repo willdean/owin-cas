@@ -9,7 +9,7 @@ using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.Infrastructure;
 using Owin;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     /// <summary>
     /// OWIN middleware for authenticating users using Facebook
@@ -72,21 +72,7 @@ namespace Web2010.Models.Cas
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Managed by caller")]
         private static HttpMessageHandler ResolveHttpMessageHandler(CasAuthenticationOptions options)
         {
-            HttpMessageHandler handler = options.BackchannelHttpHandler ?? new WebRequestHandler();
-
-            // If they provided a validator, apply it or fail.
-            if (options.BackchannelCertificateValidator != null)
-            {
-                // Set the cert validate callback
-                var webRequestHandler = handler as WebRequestHandler;
-                if (webRequestHandler == null)
-                {
-                    throw new InvalidOperationException("Cas: Validator handler mismatch");
-                }
-                webRequestHandler.ServerCertificateValidationCallback = options.BackchannelCertificateValidator.Validate;
-            }
-
-            return handler;
+            return options.BackchannelHttpHandler ?? new WebRequestHandler();
         }
     }
 }

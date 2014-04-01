@@ -3,7 +3,7 @@ using System.Net.Http;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     public class CasAuthenticationOptions : AuthenticationOptions
     {
@@ -17,18 +17,7 @@ namespace Web2010.Models.Cas
         }
 
         /// <summary>
-        /// Gets or sets the a pinned certificate validator to use to validate the endpoints used
-        /// in back channel communications belong to Google.
-        /// </summary>
-        /// <value>
-        /// The pinned certificate validator.
-        /// </value>
-        /// <remarks>If this property is null then the default certificate checks are performed,
-        /// validating the subject name and if the signing chain is a trusted party.</remarks>
-        public ICertificateValidator BackchannelCertificateValidator { get; set; }
-
-        /// <summary>
-        /// Gets or sets timeout value in milliseconds for back channel communications with Google.
+        /// Gets or sets timeout value in milliseconds for back channel communications to CAS server.
         /// </summary>
         /// <value>
         /// The back channel timeout.

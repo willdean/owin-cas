@@ -1,7 +1,6 @@
 ﻿using System.Threading.Tasks;
-using owin_cas;
 
-namespace Web2010.Models.Cas
+namespace OwinCas
 {
     public interface ICasAuthenticationProvider
     {
