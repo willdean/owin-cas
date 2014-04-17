@@ -143,19 +143,6 @@ namespace OwinCas
                    "?state=" + Uri.EscapeDataString(state);
         }
         
-        /*
-        private async Task<Message> ParseRequestMessageAsync(IReadableStringCollection query)
-        {
-            if (Request.Method == "POST")
-            {
-                IFormCollection form = await Request.ReadFormAsync();
-                return new Message(form, strict: true);
-            }
-            return new Message(query, strict: true);
-        }
-         * */
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times", Justification = "MemoryStream.Dispose is idempotent")]
         protected override Task ApplyResponseChallengeAsync()
         {
             if (Response.StatusCode != 401)
