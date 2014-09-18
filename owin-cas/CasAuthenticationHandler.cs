@@ -61,7 +61,7 @@ namespace OwinCas
 
                 // Now, we need to get the ticket validated
 
-                string validateUrl = Options.CasServerUrlBase + "/validate" +
+                string validateUrl = Options.CasServerUrlBase + "/serviceValidate" +
                                      "?service=" + Uri.EscapeDataString(BuildReturnTo(GetStateParameter(query)))+
                                      "&ticket=" + Uri.EscapeDataString(ticket);
                 
