@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Owin.Cas</id>
+        <version>1.0.0</version>
+        <title>This is OWIN security middleware</title>
+        <authors>willdean</authors>
+        <owners>oliver254</owners>
+        <projectUrl>https://github.com/willdean/owin-cas</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>This is OWIN security middleware, so you'd use it much like the other bits of security middleware which MS is providing as part of the Katana project.
+
+This is extremely basic, largely untested and broadly unfinished. I only put it on Github because someone asked to see the source. Don't use it unless you're confident you can test and debug it yourself.
+
+That said, I would appreciate any feedback.</description>
+        <releaseNotes />
+        <tags>Owin Cas Authentication</tags>
+        <dependencies>
+            <dependency id="Microsoft.Owin.Security.OpenIdConnect" version="3.0.0" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="lib\net45\_._" target="lib\net45\_._" />
+    </files>
+</package>
