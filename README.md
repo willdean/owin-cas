@@ -1,3 +1,14 @@
+
+If you're here because you downloaded something from nuget which refers to here, my advice would to stop using it.
+
+Despite my name being in the Nuget metadata, what's actually up there is a fork from here https://github.com/olivierutbm, which was heavily modified and then had a nuspec file written for it (by the forker).
+
+The Nuget package is nothing to do with me, and I certainly wouldn't have uploaded this (basically a pile of unfinished hacked-about low-quality sample from the Katana project) to Nuget, with all that implies about it being ready to drop into your project.
+
+Obviously Olivier is welcome to do want he wants with this code, including uploading it to Nuget.org - I just wouldn't put my name to the package...
+
+
+
 owin-cas
 ========
 
