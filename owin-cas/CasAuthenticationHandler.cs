@@ -61,43 +61,44 @@ namespace OwinCas
 
                 // Now, we need to get the ticket validated
 
-                string validateUrl = Options.CasServerUrlBase + "/validate" +
+                string validateUrl = Options.CasServerUrlBase + "/serviceValidate" +
                                      "?service=" + Uri.EscapeDataString(BuildReturnTo(GetStateParameter(query)))+
                                      "&ticket=" + Uri.EscapeDataString(ticket);
                 
-                HttpResponseMessage response = await _httpClient.GetAsync(validateUrl, Request.CallCancelled);
+                 HttpResponseMessage response = await _httpClient.GetAsync(validateUrl, Request.CallCancelled);
 
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-
-
-                String validatedUserName = null;
-                var responseParts = responseBody.Split('\n');
-                if (responseParts.Length >= 2)
+                var responseBody = await response.Content.ReadAsStringAsync();
+                string validatedUserName = null;
+                
+                using (TextReader stringReader = new StringReader(responseBody))
                 {
-                    if (responseParts[0] == "yes")
+                    var xmlReaderSetting = new XmlReaderSettings();
+                    xmlReaderSetting.ConformanceLevel = ConformanceLevel.Auto;
+                    xmlReaderSetting.IgnoreWhitespace = true;
+                    using (XmlReader xmlReader = XmlReader.Create(stringReader, xmlReaderSetting))
                     {
-                        validatedUserName = responseParts[1];
+                        if (xmlReader.ReadToFollowing("cas:user"))
+                        {
+                            validatedUserName = xmlReader.ReadElementString();
+                        }
                     }
                 }
 
-                if (!String.IsNullOrEmpty(validatedUserName))
-                {
-                    var identity = new ClaimsIdentity(Options.AuthenticationType);
-                    identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, validatedUserName, "http://www.w3.org/2001/XMLSchema#string", Options.AuthenticationType));
-                    identity.AddClaim(new Claim(ClaimTypes.Name, validatedUserName, "http://www.w3.org/2001/XMLSchema#string", Options.AuthenticationType));
+                if (String.IsNullOrEmpty(validatedUserName)) return new AuthenticationTicket(null, properties);
 
-                    var context = new CasAuthenticatedContext(
-                        Context,
-                        identity,
-                        properties);
+                var identity = new ClaimsIdentity(Options.AuthenticationType);
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, validatedUserName, "http://www.w3.org/2001/XMLSchema#string", Options.AuthenticationType));
+                identity.AddClaim(new Claim(ClaimTypes.Name, validatedUserName, "http://www.w3.org/2001/XMLSchema#string", Options.AuthenticationType));
 
-                    await Options.Provider.Authenticated(context);
+                var context = new CasAuthenticatedContext(
+                    Context,
+                    identity,
+                    properties);
 
-                    return new AuthenticationTicket(context.Identity, context.Properties);
-                }
+                await Options.Provider.Authenticated(context);
 
-                return new AuthenticationTicket(null, properties);
+                return new AuthenticationTicket(context.Identity, context.Properties);
             }
             catch (Exception ex)
             {
